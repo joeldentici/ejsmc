@@ -1,0 +1,17 @@
+{
+  "name": "ejsmc",
+  "version": "1.0.0",
+  "description": "Compiles modules using monadic-js expression extensions.",
+  "bin": {
+    "ejsmc": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "node src/index.js src bin"
+  },
+  "author": "Joel Dentici",
+  "license": "MIT",
+  "dependencies": {
+    "monadic-js": "^1.2.3"
+  }
+}
