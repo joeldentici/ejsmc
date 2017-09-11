@@ -137,7 +137,7 @@ function compileDirectory(dir, outputDir) {
 			if (stats.isFile())
 				compileFile(file, inputDirList, outputDir)
 			else
-				compileDirectory(file, outputDir)
+				compileDirectory(file, path.join(outputDir, f))
 		};
 	}
 

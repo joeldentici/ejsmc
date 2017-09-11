@@ -115,7 +115,7 @@ return ( writeFile )(( path.join )(outputDir, newFilename), output) }) } )()) : 
 function compileDirectory(dir, outputDir) {
 	function action(inputDirList) {
 		return f => ( () => { const file = ( path.join )(dir, f);
-return ( stat )(file).chain((stats) => { return ( (( stats.isFile )()) ? (( compileFile )(file, inputDirList, outputDir)) : (( compileDirectory )(file, outputDir)) ) }) } )();
+return ( stat )(file).chain((stats) => { return ( (( stats.isFile )()) ? (( compileFile )(file, inputDirList, outputDir)) : (( compileDirectory )(file, ( path.join )(outputDir, f))) ) }) } )();
 	}
 
 	return ( () => { return ( readdir )(dir).chain((inputDirList) => { return ( ( mapM )(Async, ( action )(inputDirList)) )(inputDirList) }) } )();
