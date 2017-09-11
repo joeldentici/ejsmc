@@ -5,7 +5,7 @@ For a Node.js application this is unnecessary as you can simply use the module l
 
 Documentation for the expression extensions can be found [here](https://github.com/joeldentici/monadic-js#do-notation--expression-extensions).
 
-The target language is the one included in version `1.2.3` of `monadic-js`. This package will be kept updated to track the version used by `monadic-js` and its version numbers will be kept identical (due to semantic versioning, if the language in `monadic-js` becomes backwards incompatibile, it is necessary for the version of this package to reflect that as well -- the easiest way to do this is to have the same version numbers).
+The target language is the one included in version `1.2.3` of `monadic-js`. This package will be kept updated to track the version used by `monadic-js` and its version numbers will be kept identical up to minor version (due to semantic versioning, if the language in `monadic-js` becomes backwards incompatibile, it is necessary for the version of this package to reflect that as well -- the easiest way to do this is to have the same version numbers).
 
 ## Installation
 `npm install -g ejsmc`
