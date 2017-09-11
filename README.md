@@ -1,7 +1,7 @@
 # ejsmc
 Compile modules using `monadic-js` expression extensions. This is useful to use them in code that will run in the browser or when developing a library to release to NPM. You can run this as a prior step to using `webpack` on your source code for projects targeting the browser or both platforms.
 
-For a nodejs application this is unnecessary as you can simply use the module loader extension in `monadic-js`.
+For a Node.js application this is unnecessary as you can simply use the module loader extension in `monadic-js`.
 
 Documentation for the expression extensions can be found [here](https://github.com/joeldentici/monadic-js#do-notation--expression-extensions).
 
