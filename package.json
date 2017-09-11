@@ -1,6 +1,6 @@
 {
   "name": "ejsmc",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Compiles modules using monadic-js expression extensions.",
   "bin": {
     "ejsmc": "./bin/index.js"
