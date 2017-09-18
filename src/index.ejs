@@ -86,7 +86,7 @@ function updateRequire(source, fileName, inputDirList) {
 	const outName = getName(path.basename(fileName), inputDirList);
 
 	const outCode = source.replace(
-		/(^\s*|=\s*)require\((.*)\)/g,
+		/(^\s*|=\s*)require\((.*?)\)/g,
 		(_, m, m2) => m + req(getName(clean(m2), inputDirList))
 	);
 
