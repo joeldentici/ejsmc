@@ -1,9 +1,34 @@
-const monadic = require("monadic-js");
+(function() {
+const path = require('path');
+
+const oldRequire = require;
+function fname(file) {
+	return path.basename(file, path.extname(file));
+}
+function getName(fileName) {
+	const ext = path.extname(fileName).replace(/\./, '');
+
+	if (ext && ext !== 'js') {
+		return path.dirname(fileName) 
+		 + '/' + fname(fileName) + `-${ext}.js`;
+	}
+	else {
+		return fileName;
+	}
+}
+
+require = function(pathStr) {
+	return oldRequire(getName(pathStr));
+}
+
+})();
+
+const monadic = require('monadic-js');
 const {mapM, guard} = monadic.Utility;
 const Async = monadic.Async;
-const path = require("path");
-const fs = require("fs");
-const spawn = require("child_process").spawn;
+const path = require('path');
+const fs = require('fs');
+const spawn = require('child_process').spawn;
 
 //wrap node functions as Async
 const readFile = Async.wrap(fs.readFile);
@@ -22,7 +47,9 @@ const mkdirp = p => Async.create((succ, fail) => {
 });
 
 //get filename from path with no extension
-const fname = file => path.basename(file, path.extname(file));
+function fname(file) {
+	return path.basename(file, path.extname(file));
+}
 
 
 /**
@@ -72,9 +99,25 @@ function clean(module) {
  *	Creates a new require statement from a module
  *	name.
  */
+/*
 function req(name) {
 	return 'require(' + JSON.stringify(name) + ')';
+}*/
+
+const req = `(function() {
+const path = require('path');
+
+const oldRequire = require;
+${fname + ''}
+${getName + ''}
+
+require = function(pathStr) {
+	return oldRequire(getName(pathStr));
 }
+
+})();
+
+`;
 
 /**
  *	updateRequire :: (string, string) -> [string, string]
@@ -85,12 +128,20 @@ function req(name) {
 function updateRequire(source, fileName, inputDirList) {
 	const outName = getName(path.basename(fileName), inputDirList);
 
+/*
 	const outCode = source.replace(
 		/(^\s*|=\s*)require\((.*?)\)/g,
 		(_, m, m2) => m + req(getName(clean(m2), inputDirList))
 	);
+*/
 
-	return [outCode, outName];
+	const lines = source.split("\n");
+	const shebang = lines[0].startsWith('#!') ? lines[0] + "\n" : '';
+	const keepLines = lines.slice(shebang ? 1 : 0);
+
+	const outSource = shebang + req + keepLines.join("\n");
+
+	return [outSource, outName];
 }
 
 /**
